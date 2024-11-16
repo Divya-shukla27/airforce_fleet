@@ -1,0 +1,344 @@
+/* General Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2C3E50; /* Midnight Blue Background */
+    color: #BDC3C7; /* Light Grey Text */
+    line-height: 1.6;
+}
+
+header {
+    background-color: #1A1F36; /* Dark Royal Blue */
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-size: 3em;
+    color: #F39C12; /* Vibrant Peach for Header */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.main-nav a {
+    color: #BDC3C7; /* Light Grey Links */
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: #F39C12; /* Peach color on hover */
+}
+
+.sub-header {
+    background-color: #1A1F36; /* Dark Royal Blue */
+    padding: 10px 0;
+    margin-top: 5px;
+}
+
+.sub-header nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    gap: 15px;
+}
+
+.sub-header a {
+    color: #BDC3C7; /* Soft Light Blue for Sub-header Links */
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+.sub-header a:hover {
+    color: #F39C12; /* Light Grey on hover */
+}
+/* Plane Image Styling */
+.plane-image {
+    position: fixed;
+    bottom: 10px; /* Initially at the bottom */
+    z-index: 100;
+    transition: transform 8s ease-out, opacity 1s ease; /* Slow transition for movement */
+}
+
+.plane-image.left {
+    left: 20px; /* Left corner */
+}
+
+.plane-image.right {
+    right: 20px; /* Right corner */
+}
+
+.plane-image img {
+    width: 70px; /* Increased size */
+    cursor: pointer;
+    filter: brightness(0.8);
+    transition: filter 0.3s ease;
+}
+
+.plane-image img:hover {
+    filter: brightness(1);
+}
+
+/* Animation for plane moving from bottom to top */
+@keyframes planeMove {
+    0% {
+        bottom: 10px; /* Start at the bottom */
+        opacity: 1;   /* Fully visible */
+        transform: scale(1); /* Start with normal size */
+    }
+    100% {
+        bottom: 85%;  /* Stop a little below the top to avoid cut-off */
+        opacity: 1;   /* Maintain full visibility */
+        transform: scale(1); /* Increase size to 1.5x */
+    }
+}
+
+/* Fade-out effect for the plane when clicked */
+@keyframes planeReset {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3; /* Faded */
+    }
+}
+
+/* Initial state for opacity */
+.plane-image {
+    opacity: 1;
+}
+
+/* Plane Reset Style after clicking (fade out) */
+.plane-image.fade {
+    animation: planeReset 1s forwards;
+}
+
+/* Plane Reset Animation for bottom-to-top restart */
+@keyframes planeRestart {
+    0% {
+        bottom: 10px; /* Start at the bottom */
+        opacity: 1;   /* Fully visible */
+        transform: scale(1); /* Start with normal size */
+    }
+    100% {
+        bottom: 90%;  /* Stop a little below the top to avoid cut-off */
+        opacity: 1;   /* Maintain full visibility */
+        transform: scale(1); /* Increase size to 1.5x */
+    }
+}
+
+/* Plane move animation for both left and right planes */
+.plane-image {
+    animation: planeMove 15s infinite ease-out; /* Slow and smooth move to top */}
+
+
+/* Section and Card Styling */
+section {
+    padding: 50px;
+    background: #34495E; /* Darker Grey for Sections */
+    margin: 40px auto;
+    border-radius: 15px;
+    width: 85%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease;
+}
+
+section:hover {
+    background: #2C3E50; /* Slightly lighter background on hover */
+}
+
+section h2 {
+    font-size: 2.5em;
+    color: #F39C12; /* Vibrant Peach for Section Titles */
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+section p {
+    font-size: 1.1em;
+    text-align: center;
+    color: #BDC3C7;
+    margin-bottom: 30px;
+}
+
+/* Card Flip Styling */
+.card {
+    width: 300px;
+    height: 400px;
+    perspective: 1000px;
+    margin: 20px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.6s;
+}
+
+.card-front {
+    background-color: #1A1F36; /* Dark Royal Blue for Card Front */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-front img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.card-back {
+    background-color: #34495E; /* Slate Grey for Card Back */
+    color: #BDC3C7;
+    transform: rotateY(180deg);
+    padding: 20px;
+    text-align: center;
+}
+
+.card:hover .card-front {
+    transform: rotateY(180deg);
+}
+
+.card:hover .card-back {
+    transform: rotateY(0);
+}
+
+/* Scroll To Top */
+html {
+    scroll-behavior: smooth;
+}
+
+#carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-container {
+    display: flex;
+    gap: 20px;
+    
+}
+
+.carousel-track {
+    display: flex;
+}
+
+section .section-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    background-color: #1A1F36; /* Dark Royal Blue Footer */
+    padding: 20px 0;
+    color: #BDC3C7;
+    font-size: 1em;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+footer:hover {
+    background-color: #2C3E50;
+}
+
+footer a {
+    color: #F39C12; /* Peach Links in Footer */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: #BDC3C7;
+}
+.billboard-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 400px;
+    overflow: hidden;
+    margin: 20px auto;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 1s ease;
+    width: 100%; /* Dynamically managed by JavaScript */
+}
+
+.carousel-item {
+    position: relative;
+    flex: 0 0 100%; /* Each item takes 100% of the carousel width */
+    text-decoration: none;
+    color: #BDC3C7;
+}
+
+.carousel-item img {
+   
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.carousel-item h3 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    font-size: 24px;
+    border-radius: 8px;
+    color: #F39C12;
+}
+
+/* Animation for sliding images */
+@keyframes slide {
+    0% { transform: translateX(0); }
+    30% { transform: translateX(-100%); }
+    55% { transform: translateX(-200%); }
+    80% { transform: translateX(-300%); }
+    100% { transform: translateX(0); }
+}
+
+.carousel-track {
+    animation: slide 60s infinite;
+}
+
